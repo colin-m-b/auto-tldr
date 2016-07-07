@@ -47,6 +47,10 @@ function aTags() {
 aTags();
 
 // test sending a message
-chrome.runtime.sendMessage({}, function(response) {
+chrome.runtime.sendMessage({
+	article: articleArr,
+	section: sectionArr,
+	footer: footerArr
+}, function(response) {
   console.log(response.farewell);
 });
