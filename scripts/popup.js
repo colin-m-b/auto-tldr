@@ -5,7 +5,7 @@ var body = $('body');
 var box = $('#box');
 
 // jquery test
-var newBox = $('<div><h1>Auto TLDR</h1></div>');
+var newBox = $('<div><h1>HELLO</h1></div>');
 body.append(newBox);
 
 // pass in the jquery file and scraping script into the current page
@@ -13,12 +13,13 @@ chrome.tabs.executeScript(null, {file: "scripts/jquery-3.0.0.min.js"}, function(
   chrome.tabs.executeScript(null, {file: "scripts/scrape.js"});
 });
 
-// sendReponse is a method
+
 chrome.runtime.onMessage.addListener(
   function (request, sender, sendResponse) {
-
-  }
-);
+    request.links.forEach(function(element) {
+      body.append('<p>' + element + '</p>');
+    });
+});
 
 
 // for dynamic popup window open

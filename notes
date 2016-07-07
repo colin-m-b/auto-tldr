@@ -1,0 +1,32 @@
+=== Event Pages ===
+- The event page is loaded when it is "needed"
+- Once the event page has been idle a short time (a few seconds), the runtime.onSuspend event is dispatched.
+
+= Event registration
+- Because the listeners themselves only exist in the context of the event page, you must use addListener each time the event page loads; only doing so at runtime.onInstalled by itself is insufficient.
+
+-If you need to keep runtime state in memory throughout a browser session, use the storage API or IndexedDB
+
+
+=== Message Passing ===
+- A message can contain any valid JSON object (null, boolean, number, string, array, or object)
+
+= Simple one-time requests#
+- sending request from a content script
+
+chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
+  console.log(response.farewell);
+});
+
+- On the receiving end, you need to set up an runtime.onMessage event listener to handle the message.
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+    if (request.greeting == "hello")
+      sendResponse({farewell: "goodbye"});
+  });
+
+have it run when pop up 
