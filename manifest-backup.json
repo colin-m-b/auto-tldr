@@ -14,11 +14,18 @@
       "persistent": false
   },
   "permissions": [
-    "tabs", "https://*/*", "http://*/*", "activeTab"
+    "activeTab"
   ],
   "browser_action": {
     "default_icon": "icons/icon16.png",
     "default_popup": "popup.html",
     "default_title": "Auto TLDR"
-  }
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["http://*/*"],
+      "js": ["scripts/jquery-3.0.0.min.js", "scripts/scrape.js"]
+    }
+  ]
 }
