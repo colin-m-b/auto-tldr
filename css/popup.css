@@ -7,8 +7,24 @@ body {
 }
 div {
   width: 500px;
-  border: 5px solid red;
+  border: 1px solid black;
+}
+
+#container {
+	
 }
 h1 {
   text-align: center;
+}
+
+p {
+	font-size: 12px;
+}
+
+a {
+	text-decoration: none;
+}
+
+.content {
+	display: none;
 }

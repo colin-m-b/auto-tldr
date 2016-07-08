@@ -4,9 +4,16 @@ console.log('scrape is running');
 
 //api key: DA41C62EB0
 
-$.getJSON("http://api.smmry.com/&SM_API_KEY=DA41C62EB0&SM_LENGTH=7&SM_WITH_BREAK&SM_" + url, function(data) {
-	//append data to popup page somewhere
-})
+
+
+// var url = chrome.browserAction.onClicked.addListener(function(tab) {
+//     var res = encodeURIComponent(tab.url);
+//     return res;
+// });
+
+// $.getJSON("http://api.smmry.com/&SM_API_KEY=DA41C62EB0&SM_LENGTH=7&SM_WITH_BREAK&SM_" + url, function(data) {
+// 	//append data to popup page somewhere
+// })
 
 function aTags() {
 	//create and populate array for article tags
@@ -46,19 +53,19 @@ function aTags() {
 			text: textStuff
 		}
 		footerArr.push(obj);
+
 	})
-	console.log('article length: ' + articleArr.length, "footer length: " + footerArr.length);
-	
-	return [footerArr, sectionArr, articleArr]
+	console.log(footerArr)
+	return [footerArr, sectionArr, articleArr];
 }
 
 var arrays = aTags();
 
-// test sending a message
 chrome.runtime.sendMessage({
+	arrays: arrays,
 	article: arrays[2],
 	section: arrays[1],
 	footer: arrays[0]
 }, function(response) {
-  console.log(response.farewell);
 });
+	
